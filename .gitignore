@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Node / Next
+genre-whisper-web/node_modules/
+genre-whisper-web/.next/
+genre-whisper-web/*.log
+genre-whisper-web/dev-server*.out
+genre-whisper-web/dev-server*.err
+genre-whisper-web/prod-server*.out
+genre-whisper-web/prod-server*.err
+genre-whisper-web/sample-upload.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Large local datasets and generated artifacts
+books_data.csv
+Books_rating.csv
+genrewhisper_corpus.txt
+genrewhisper_fasttext.bin
+genre_classifier.onnx
+genre_pipeline.onnx
+genre_scaler.onnx
+genre_labels.json
+genre_label_encoder.joblib
+genrewhisper_metadata.json
+genrewhisper_onnx_bundle.zip
+
+# Local run artifacts
+*.out
+*.err

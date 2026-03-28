@@ -1,0 +1,999 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2150 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+() Tj
+0 -15 Td
+(GENREWHISPER TECHNICAL BRIEF) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(1. PROJECT OVERVIEW) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(GenreWhisper is an NLP Foundations final project that asks a simple but strong) Tj
+0 -15 Td
+(research question:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Can reader reviews alone predict a book's genre/category? And do review sentiments) Tj
+0 -15 Td
+(reveal hidden genre biases?) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project combines two outputs:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(1. A notebook-based NLP pipeline built around the Amazon Books Reviews dataset.) Tj
+0 -15 Td
+(2. A Next.js website that presents the project as an interactive literary-tech) Tj
+0 -15 Td
+(experience.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project is intentionally designed as both a research artifact and a product) Tj
+0 -15 Td
+(artifact. The notebook handles data exploration, preprocessing, modeling,) Tj
+0 -15 Td
+(evaluation, and export. The website turns the project into a public-facing) Tj
+0 -15 Td
+(experience with a cinematic, book-inspired interface.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(2. WHY THIS PROJECT MATTERS) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Most book classification systems rely on publisher metadata, store taxonomy, or) Tj
+0 -15 Td
+(manually assigned labels. GenreWhisper explores a more interesting idea: reviews) Tj
+0 -15 Td
+(may reveal a book's "felt" genre more honestly than metadata does.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(If review language alone can predict genre with useful accuracy, then reviews) Tj
+0 -15 Td
+(become a powerful signal for:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? catalog cleanup,) Tj
+0 -15 Td
+(? recommendation systems,) Tj
+0 -15 Td
+(? audience segmentation,) Tj
+0 -15 Td
+(? discovering misclassified books,) Tj
+0 -15 Td
+(? understanding how readers emotionally frame different genres.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project also goes one step further by examining whether some genres attract) Tj
+0 -15 Td
+(more polarized language or systematically different sentiment profiles.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(3. DATASET) Tj
+0 -15 Td
+() Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 1538 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+() Tj
+0 -15 Td
+(The project uses the Amazon Books Reviews dataset from Kaggle.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Files:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? `books_data.csv`) Tj
+0 -15 Td
+(? `Books_rating.csv`) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Exact columns used in the project:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(From books_data.csv:) Tj
+0 -15 Td
+(? `Title`) Tj
+0 -15 Td
+(? `description`) Tj
+0 -15 Td
+(? `authors`) Tj
+0 -15 Td
+(? `categories`) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(From Books_rating.csv:) Tj
+0 -15 Td
+(? `Title`) Tj
+0 -15 Td
+(? `review/text`) Tj
+0 -15 Td
+(? `review/summary`) Tj
+0 -15 Td
+(? `review/score`) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The join key is Title, normalized for safer matching.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(4. RESEARCH WORKFLOW) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The notebook follows a full NLP pipeline aligned with the module brief.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(4.1 Data Loading and Merge) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project loads the exact required columns from both CSVs, normalizes titles,) Tj
+0 -15 Td
+(extracts a primary genre from categories, and merges the review data with the book) Tj
+0 -15 Td
+(metadata.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This creates a working dataset where each row links:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? book identity,) Tj
+0 -15 Td
+(? book genre,) Tj
+0 -15 Td
+(? reader review text,) Tj
+0 -15 Td
+(? review summary,) Tj
+0 -15 Td
+(? numerical review score.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(4.2 Practical Modeling Subset) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 1860 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Because the original dataset is extremely large, the notebook creates a practical) Tj
+0 -15 Td
+(modeling subset:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? keep the most frequent genres,) Tj
+0 -15 Td
+(? require a minimum number of reviews per genre,) Tj
+0 -15 Td
+(? cap the maximum number of reviews per genre.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This keeps the notebook runnable in both Google Colab and local Jupyter while) Tj
+0 -15 Td
+(preserving a meaningful class-imbalance problem.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(5. EXPLORATORY DATA ANALYSIS) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The EDA section is not decorative. It supports the research question directly.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Main analyses include:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? genre distribution,) Tj
+0 -15 Td
+(? review-length distribution,) Tj
+0 -15 Td
+(? average review score per genre,) Tj
+0 -15 Td
+(? standard deviation of review scores per genre,) Tj
+0 -15 Td
+(? word cloud from the largest genre.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(These visuals help establish:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? which genres dominate the dataset,) Tj
+0 -15 Td
+(? whether review length varies by category,) Tj
+0 -15 Td
+(? whether some genres have more polarized or consistently positive reviews,) Tj
+0 -15 Td
+(? what lexical texture exists before modeling.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This is where the "hidden genre bias" question starts to become visible.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(6. TEXT PREPROCESSING WITH SPACY) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project uses spaCy for text preprocessing.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Required preprocessing steps:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? tokenization,) Tj
+0 -15 Td
+(? lemmatization,) Tj
+0 -15 Td
+(? stop-word removal,) Tj
+0 -15 Td
+(? punctuation removal.) Tj
+0 -15 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2227 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+(Only the review text is used as the predictive language source. This is important) Tj
+0 -15 Td
+(because the core claim of the project is that reader reviews alone can contain) Tj
+0 -15 Td
+(enough semantic information to predict genre.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The preprocessing decisions are designed to reduce noise while retaining genre-) Tj
+0 -15 Td
+(carrying signals such as thematic words, emotional vocabulary, and world-building) Tj
+0 -15 Td
+(language.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(7. FASTTEXT EMBEDDINGS) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(After preprocessing, the notebook trains a custom FastText 100-dimensional model) Tj
+0 -15 Td
+(on the cleaned review corpus.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(FastText was chosen because:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? it is lightweight,) Tj
+0 -15 Td
+(? it handles noisy and imperfect text well,) Tj
+0 -15 Td
+(? it captures subword information,) Tj
+0 -15 Td
+(? it is practical for a deployment-oriented student project.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Each cleaned review is converted into a single document vector by averaging the) Tj
+0 -15 Td
+(FastText word vectors for the tokens in that review.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This produces a dense semantic representation for each review that can be fed into) Tj
+0 -15 Td
+(a classical classifier.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(8. CLASSIFICATION MODEL) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The model used for genre prediction is Logistic Regression with:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? `class_weight="balanced"`) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This choice matters because the genre distribution is not uniform. Some genres are) Tj
+0 -15 Td
+(overrepresented, while others have much less coverage.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Using class weights makes the model more honest and aligned with the module's) Tj
+0 -15 Td
+(requirement to address class imbalance rather than ignore it.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The training flow is:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(1. split the data into train and test sets using stratification,) Tj
+0 -15 Td
+(2. scale the FastText vectors,) Tj
+0 -15 Td
+(3. train Logistic Regression,) Tj
+0 -15 Td
+(4. evaluate on held-out test data.) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1948 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(9. EVALUATION) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project explicitly does not rely on accuracy alone.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Reported metrics include:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? Precision \(macro\)) Tj
+0 -15 Td
+(? Recall \(macro\)) Tj
+0 -15 Td
+(? F1 \(macro\)) Tj
+0 -15 Td
+(? Precision \(weighted\)) Tj
+0 -15 Td
+(? Recall \(weighted\)) Tj
+0 -15 Td
+(? F1 \(weighted\)) Tj
+0 -15 Td
+(? full classification report) Tj
+0 -15 Td
+(? confusion matrix) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This matches the course requirement to explain why these metrics matter.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Why these metrics are appropriate:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? **Macro metrics** show whether minority genres are being handled fairly.) Tj
+0 -15 Td
+(? **Weighted metrics** show overall performance while accounting for class size.) Tj
+0 -15 Td
+(? **Confusion matrix** reveals which genres the model mixes up and where the) Tj
+0 -15 Td
+(taxonomy overlaps.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This is especially important in a multi-class genre problem, where "close" genres) Tj
+0 -15 Td
+(can still be meaningfully different.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(10. INSIGHTS AND BUSINESS VALUE) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The notebook includes a dedicated insight section that goes beyond metric) Tj
+0 -15 Td
+(reporting.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Key forms of insight:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? identifying genres with the highest average review score,) Tj
+0 -15 Td
+(? detecting genres with the highest review-score variance,) Tj
+0 -15 Td
+(? examining which genres attract longer reviews,) Tj
+0 -15 Td
+(? extracting common terms from the strongest genre clusters.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(These insights can support:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? publishers checking audience alignment,) Tj
+0 -15 Td
+(? retailers detecting potential metadata misclassification,) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 2341 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+(? recommendation systems improving category relevance,) Tj
+0 -15 Td
+(? authors understanding how readers linguistically frame genre experience.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(In other words, the project is not only predictive. It is interpretive.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(11. HIDDEN GENRE BIAS) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(One of the most interesting parts of GenreWhisper is the second half of the) Tj
+0 -15 Td
+(research question: sentiment bias.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project investigates whether some genres are systematically associated with:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? higher average review scores,) Tj
+0 -15 Td
+(? more polarized scoring behavior,) Tj
+0 -15 Td
+(? longer or more emotionally detailed reviews.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This matters because genres are not judged neutrally by readers. Some are over-) Tj
+0 -15 Td
+(broadened, some are dismissed, and some create stronger emotional extremes.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Examples of the kind of patterns the project is designed to surface:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? "Fiction" behaving like a broad catch-all bucket,) Tj
+0 -15 Td
+(? politically charged categories showing stronger sentiment variance,) Tj
+0 -15 Td
+(? world-building-heavy genres attracting longer reviews and richer vocabulary.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(12. LIMITATIONS AND ETHICS) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project includes limitations and ethical reflection explicitly.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Main limitations:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? the dataset reflects Amazon behavior, not universal reading culture,) Tj
+0 -15 Td
+(? joining on title can introduce ambiguity,) Tj
+0 -15 Td
+(? the modeling subset is practical rather than exhaustive,) Tj
+0 -15 Td
+(? averaged FastText embeddings are efficient but simpler than transformer) Tj
+0 -15 Td
+(representations.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Ethical considerations:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? automated genre labeling can reinforce commercial taxonomy bias,) Tj
+0 -15 Td
+(? review language can reflect cultural and platform bias,) Tj
+0 -15 Td
+(? recommendation logic can over-compress cross-genre works into rigid labels,) Tj
+0 -15 Td
+(? human oversight remains important for nuanced literary classification.) Tj
+0 -15 Td
+() Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 1747 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+() Tj
+0 -15 Td
+(13. DEPLOYMENT AND EXPORT) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(GenreWhisper is not just a notebook. It has a deployment-oriented output.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The notebook exports:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? `genre_pipeline.onnx`) Tj
+0 -15 Td
+(? `genre_classifier.onnx`) Tj
+0 -15 Td
+(? `genre_scaler.onnx`) Tj
+0 -15 Td
+(? `genrewhisper_fasttext.bin`) Tj
+0 -15 Td
+(? `genre_labels.json`) Tj
+0 -15 Td
+(? `genrewhisper_metadata.json`) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The ONNX export is intended for use in the website layer so the project can move) Tj
+0 -15 Td
+(beyond static analysis and toward interactive inference.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(14. WEBSITE ARCHITECTURE) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The project includes a website in the genre-whisper-web folder.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Main stack:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? Next.js) Tj
+0 -15 Td
+(? TypeScript) Tj
+0 -15 Td
+(? Tailwind CSS) Tj
+0 -15 Td
+(? GSAP) Tj
+0 -15 Td
+(? Three.js / React Three Fiber / Drei) Tj
+0 -15 Td
+(? ONNX Runtime-oriented workflow) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Key pages and components:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? landing page with a floating 3D book hero,) Tj
+0 -15 Td
+(? prediction page for review-based genre inference,) Tj
+0 -15 Td
+(? upload page for user-submitted files,) Tj
+0 -15 Td
+(? insights page for visual patterns,) Tj
+0 -15 Td
+(? about page linking the research and presentation,) Tj
+0 -15 Td
+(? animated sidebar navigation.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(15. INTENDED VISUAL IDENTITY) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The website's visual language is essential to understanding how the project should) Tj
+0 -15 Td
+(be presented.) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 1928 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+() Tj
+0 -15 Td
+(It is not a generic AI dashboard.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Its design language is:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? vintage library,) Tj
+0 -15 Td
+(? leather-bound book aesthetics,) Tj
+0 -15 Td
+(? parchment textures,) Tj
+0 -15 Td
+(? antique gold accents,) Tj
+0 -15 Td
+(? cinematic GSAP motion,) Tj
+0 -15 Td
+(? magical particles and 3D book imagery.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Representative aesthetic cues in the codebase:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? deep brown / near-black background,) Tj
+0 -15 Td
+(? parchment-colored text,) Tj
+0 -15 Td
+(? gold gradient headline treatment,) Tj
+0 -15 Td
+(? page-curl effects,) Tj
+0 -15 Td
+(? floating open book with internal golden light,) Tj
+0 -15 Td
+(? phrases like "Whisper to the Model" and "Consulting the Oracle.") Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(This means the slide deck should feel literary, premium, and slightly mythical) Tj
+0 -15 Td
+(rather than corporate or minimal-tech.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(16. HOW THE PRESENTATION SHOULD BE TOLD) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The module instructions emphasize TED-style storytelling.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(That means the presentation should not feel like:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? a lab report,) Tj
+0 -15 Td
+(? a list of preprocessing steps,) Tj
+0 -15 Td
+(? a generic accuracy summary.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(It should feel like:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? a story with a hook,) Tj
+0 -15 Td
+(? a clean explanation of the technical method,) Tj
+0 -15 Td
+(? a reveal of what the model discovered,) Tj
+0 -15 Td
+(? a clear "so what" for publishers, retailers, or readers,) Tj
+0 -15 Td
+(? an honest limitation or ethical caution,) Tj
+0 -15 Td
+(? a memorable final takeaway.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The best presentation structure for this project is:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(1. Hook: reviews as whispers of a book's true identity.) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 1719 >>
+stream
+BT
+/F1 11 Tf
+54 778 Td
+(2. Data and method: how those whispers were cleaned and modeled.) Tj
+0 -15 Td
+(3. Results: what the classifier could infer from reviews alone.) Tj
+0 -15 Td
+(4. Bias and insight: what genre sentiment patterns reveal.) Tj
+0 -15 Td
+(5. Product and future: why the notebook plus website matters.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(17. RECOMMENDED SLIDE TONE) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(If this brief is used inside NotebookLM or another AI slide generator, the output) Tj
+0 -15 Td
+(should aim for:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? sophisticated,) Tj
+0 -15 Td
+(? cinematic,) Tj
+0 -15 Td
+(? elegant,) Tj
+0 -15 Td
+(? bookish,) Tj
+0 -15 Td
+(? visually unique,) Tj
+0 -15 Td
+(? technically credible,) Tj
+0 -15 Td
+(? low text density,) Tj
+0 -15 Td
+(? one core idea per slide.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Avoid:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? default business templates,) Tj
+0 -15 Td
+(? bright corporate blues,) Tj
+0 -15 Td
+(? robotic AI imagery,) Tj
+0 -15 Td
+(? overloaded bullet lists,) Tj
+0 -15 Td
+(? generic startup-dashboard aesthetics.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(18. FINAL TAKEAWAY) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(GenreWhisper is strongest when framed as a fusion of:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(? literary interpretation,) Tj
+0 -15 Td
+(? applied NLP,) Tj
+0 -15 Td
+(? honest model evaluation,) Tj
+0 -15 Td
+(? creative technical storytelling.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(The central message is:) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(Reader reviews are not just reactions. They are signals of genre identity,) Tj
+0 -15 Td
+(audience expectation, and hidden bias.) Tj
+0 -15 Td
+() Tj
+0 -15 Td
+(That is the insight the presentation should make memorable.) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Pages /Kids [12 0 R 13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R] /Count 9 >>
+endobj
+12 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 7 0 R >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 9 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+21 0 obj
+<< /Type /Catalog /Pages 11 0 R >>
+endobj
+xref
+0 22
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000002287 00000 n 
+0000003877 00000 n 
+0000005789 00000 n 
+0000008068 00000 n 
+0000010068 00000 n 
+0000012461 00000 n 
+0000014260 00000 n 
+0000016240 00000 n 
+0000018012 00000 n 
+0000018127 00000 n 
+0000018255 00000 n 
+0000018383 00000 n 
+0000018511 00000 n 
+0000018639 00000 n 
+0000018767 00000 n 
+0000018895 00000 n 
+0000019023 00000 n 
+0000019151 00000 n 
+0000019280 00000 n 
+trailer
+<< /Size 22 /Root 21 0 R >>
+startxref
+19331
+%%EOF

@@ -1,0 +1,438 @@
+You are generating the final presentation slides for an NLP Foundations project called **GenreWhisper**.
+
+You have enough context budget to think like a creative director, an information designer, and a technical storyteller at the same time. Use that. Do not compress this into a generic 5-slide school deck. Build something that feels authored, cinematic, and intellectually controlled.
+
+The output should feel like the presentation counterpart of the actual project, not a detachable summary.
+
+====================================================================================================
+PROJECT IDENTITY
+====================================================================================================
+
+Project name:
+GenreWhisper
+
+Core tagline:
+"Unveiling Hidden Genres from the Whispers of Readers"
+
+Research question:
+"Can reader reviews alone predict a book's genre/category? And do review sentiments reveal hidden genre biases?"
+
+Core concept:
+The project treats reader reviews as signals of a book's hidden genre identity. Instead of trusting official metadata alone, it asks whether review language itself can reveal the true semantic category of a book. It then extends the analysis to ask whether some genres attract systematically different sentiment patterns, review lengths, or emotional intensity.
+
+Project components:
+1. A notebook-based NLP pipeline.
+2. A cinematic Next.js website that presents the project in an immersive, vintage-library aesthetic.
+
+This is not just a machine learning assignment. It is a fusion of:
+- literary interpretation,
+- practical NLP,
+- model evaluation,
+- product storytelling,
+- visual world-building.
+
+====================================================================================================
+COURSE / PRESENTATION CONSTRAINTS
+====================================================================================================
+
+This is for an NLP Foundations final project.
+
+The module instructions require:
+- a clear research question,
+- full NLP pipeline,
+- honest metrics beyond accuracy,
+- at least one actionable insight,
+- one limitation or ethical consideration,
+- a TED-style narrative rather than a lab report,
+- 3 to 5 slides,
+- a short video presentation where a non-technical audience should understand the "so what" quickly.
+
+So the deck must feel:
+- immediately understandable,
+- visually elegant,
+- technically credible,
+- memorable within 5 minutes,
+- not overloaded.
+
+Target slide count:
+5 slides total
+
+Presentation mode:
+TED-style storytelling, not classroom bullet dumping
+
+Audience:
+- instructors,
+- classmates,
+- mixed technical ability,
+- people who appreciate clarity more than jargon.
+
+====================================================================================================
+DATASET AND TECHNICAL FACTS YOU MUST PRESERVE
+====================================================================================================
+
+Dataset:
+Amazon Books Reviews dataset from Kaggle
+
+Files:
+- books_data.csv
+- Books_rating.csv
+
+Exact columns used:
+From books_data.csv:
+- Title
+- description
+- authors
+- categories
+
+From Books_rating.csv:
+- Title
+- review/text
+- review/summary
+- review/score
+
+Join logic:
+- The project merges the two files on normalized Title.
+- It extracts a primary category from the categories field.
+
+Preprocessing:
+- spaCy
+- tokenization
+- lemmatization
+- stop-word removal
+- punctuation removal
+
+Embedding model:
+- custom FastText model
+- 100-dimensional
+- trained on the cleaned review corpus
+
+Classification model:
+- Logistic Regression
+- class_weight = "balanced"
+
+Why class weights matter:
+- genre classes are imbalanced,
+- some categories dominate review volume,
+- macro metrics matter because minority classes should not disappear inside a weighted average.
+
+Evaluation used:
+- precision macro
+- recall macro
+- F1 macro
+- precision weighted
+- recall weighted
+- F1 weighted
+- confusion matrix
+
+Deployment angle:
+- model artifacts exported as ONNX
+- intended for integration into a Next.js website
+
+====================================================================================================
+WHAT THE WEBSITE LOOKS AND FEELS LIKE
+====================================================================================================
+
+The slides should inherit the same visual world as the website.
+
+The website is not clean white minimalism.
+It is not a corporate SaaS dashboard.
+It is not neon cyberpunk either.
+
+It is:
+- dark leather,
+- aged parchment,
+- antique gold,
+- rare-manuscript textures,
+- floating magical book imagery,
+- cinematic transitions,
+- literary, premium, and slightly mythic.
+
+Visual motifs already present in the project:
+- deep brown / near-black background
+- parchment cream text
+- gold gradient typography
+- page curl details
+- glowing dust / sparkles
+- open 3D book with golden light inside
+- phrases like:
+  - "Whisper to the Model"
+  - "Consulting the Oracle"
+  - "Unveiling Hidden Genres from the Whispers of Readers"
+
+Typography direction:
+- elegant serif display for headings
+- refined sans-serif for body
+- titles should feel engraved, illuminated, or typeset like a collector's edition
+
+Color direction:
+- background: dark espresso / leather / near-black brown
+- body text: parchment cream
+- accents: antique gold
+- warnings / bias / limitation accents: muted ember red or deep burgundy
+- secondary accents: dark bronze, dusty olive, or faded indigo if needed
+
+Composition direction:
+- asymmetrical
+- editorial
+- cinematic
+- premium
+- one dominant visual idea per slide
+
+Avoid:
+- generic AI icons
+- robot heads
+- default bar-chart-on-white layouts
+- startup pitch deck clichés
+- overuse of stock illustrations
+- "Canva template energy"
+
+====================================================================================================
+THE STORY YOU SHOULD TELL
+====================================================================================================
+
+The emotional arc should feel like this:
+
+1. Hook:
+   Every review is a whisper. Readers often reveal what a book really is, even when metadata is broad or lazy.
+
+2. Investigation:
+   We gathered Amazon review text and book metadata, cleaned the language, and transformed those whispers into vectors.
+
+3. Revelation:
+   A lightweight but disciplined model can recover genre signals from reviews alone.
+
+4. Deeper insight:
+   Reviews do more than classify. They also reveal bias, polarization, and different emotional cultures across genres.
+
+5. Resolution:
+   GenreWhisper becomes both an analytical framework and a deployable experience through the website.
+
+This should feel like a discovery narrative, not a checklist.
+
+====================================================================================================
+SLIDE-BY-SLIDE CREATIVE DIRECTION
+====================================================================================================
+
+Slide 1: The Hook
+Purpose:
+- make the audience care immediately
+- define the problem in human terms
+
+Core message:
+Reader reviews are not noise. They are clues to a book's hidden identity.
+
+What to communicate:
+- introduce GenreWhisper
+- frame the central question in simple language
+- suggest that metadata may be too blunt, while readers reveal something more precise
+
+Suggested emotional tone:
+- mysterious
+- elegant
+- intellectually intriguing
+
+Visual direction:
+- one dominant hero visual, ideally a book or pages or fragments of reviews turning into constellations / semantic threads
+- title should feel luminous, premium, and memorable
+- minimal text
+
+Potential wording style:
+- "What if a book's true genre lives more clearly in its reviews than in its label?"
+- "Every review is a whisper of category, tone, and expectation."
+
+Slide 2: The Method
+Purpose:
+- make the technical pipeline feel legible and visually refined
+
+Core message:
+We translated messy human reviews into structured genre signals.
+
+What to communicate:
+- Amazon Books Reviews dataset
+- exact inputs: title, categories, review text, review score, summary, metadata context
+- spaCy preprocessing
+- FastText 100-d embeddings
+- Logistic Regression with class balancing
+
+What must be clear:
+- this is a full NLP pipeline, not a toy prompt experiment
+- class imbalance was addressed deliberately
+- the model choice was simple on purpose: interpretable, efficient, deployable
+
+Visual direction:
+- show the pipeline as an elegant ritual or transformation sequence rather than a boring process diagram
+- example:
+  raw review fragments -> cleaned lemmas -> embedding field -> classifier -> predicted genre
+- let the flow feel like pages being refined into meaning
+
+Do not:
+- turn this into a dense technical diagram with too many labels
+
+Slide 3: The Results
+Purpose:
+- show that the model genuinely learned something useful
+
+Core message:
+Reviews alone can carry enough semantic information to predict genre meaningfully.
+
+What to communicate:
+- metric highlights
+- confusion matrix concept
+- model performance framed honestly
+- emphasis on macro and weighted metrics rather than only accuracy
+
+What must be explained:
+- why macro metrics matter in imbalanced multi-class classification
+- why confusion matters between nearby genres
+
+Visual direction:
+- one metric should be the visual anchor
+- confusion matrix can be stylized as a heatmap panel or genre-crossing grid
+- the slide should feel like a reveal, not a spreadsheet
+
+Narrative tone:
+- confident but honest
+- no exaggerated claims
+- "meaningful signal," not "perfect classification"
+
+Slide 4: Hidden Biases and Insights
+Purpose:
+- answer the second half of the research question
+- deliver the "so what"
+
+Core message:
+Genres are not just different in topic. They are reviewed differently, judged differently, and emotionally framed differently.
+
+What to communicate:
+- some genres receive longer reviews
+- some genres show more polarized sentiment
+- some genre labels are broad enough to swallow others
+- review language can expose how readers experience genre socially, not just semantically
+
+Specific patterns you may include:
+- "Fiction" acting like an overly broad catch-all bucket
+- politically charged categories showing stronger score variance
+- world-building-heavy genres attracting longer, richer reviews
+
+Actionable takeaway required:
+- publishers can use review-language signals to audit metadata quality
+- retailers can flag books whose review language conflicts with assigned category
+- recommendation systems can use review-derived genre identity to improve discovery
+
+Visual direction:
+- this slide may be the most editorial
+- use callout cards, layered annotations, or visual artifacts that feel like findings pinned to a board in a rare-books archive
+- do not make it look like a KPI dashboard
+
+Slide 5: Product, Limitation, and Closing
+Purpose:
+- tie the research to the website
+- show future-facing relevance
+- end with maturity, not hype
+
+Core message:
+GenreWhisper is both an NLP analysis and a deployable reader-facing system.
+
+What to communicate:
+- ONNX export
+- Next.js website
+- browser-facing or product-facing inference pathway
+- one limitation
+- one ethical caution
+- one memorable closing line
+
+Possible limitation themes:
+- Amazon-specific bias
+- title-based merge ambiguity
+- bounded subset for practical notebook execution
+- simpler embedding representation than transformer models
+
+Possible ethical themes:
+- rigid genre labels can flatten hybrid or marginalized works
+- review sentiment reflects platform and cultural biases
+
+Close with a line that feels quotable.
+Examples of closing direction:
+- "Reviews do not just describe books; they reveal how readers classify them."
+- "Genre is not only assigned by publishers. It is continuously rewritten by readers."
+
+====================================================================================================
+TEXT DENSITY AND WRITING RULES
+====================================================================================================
+
+Text density:
+- low
+- every slide should have one dominant message
+- no long paragraphs on slides
+
+Writing style:
+- polished
+- vivid
+- concise
+- literate
+- confident without sounding inflated
+
+Use:
+- strong micro-headlines
+- short supporting phrases
+- selective technical vocabulary
+- elegant framing
+
+Avoid:
+- wall-of-text layouts
+- too many bullet points
+- academic jargon overload
+- fake-sounding hype
+
+====================================================================================================
+DESIGN SYSTEM RULES
+====================================================================================================
+
+Make the deck feel custom-designed.
+
+Prefer:
+- textured backgrounds
+- glowing edge lighting
+- serif title plates
+- ornamental dividers used sparingly
+- framed chart areas
+- dramatic negative space
+- visual rhythm between dense and sparse slides
+
+You may include:
+- manuscript margins
+- deckled paper edges
+- floating particles
+- faint diagrams behind the foreground
+- subtle gold linework
+
+Do not overdo:
+- grunge
+- fantasy clichés
+- decorative clutter
+
+It should feel premium, not cosplay.
+
+====================================================================================================
+WHAT SUCCESS LOOKS LIKE
+====================================================================================================
+
+A successful deck should make someone say:
+- "This feels original."
+- "I understand the question immediately."
+- "The technical pipeline is clear without being dry."
+- "The results feel real, not exaggerated."
+- "The project has an actual point beyond model training."
+- "The slides match the website and the project name."
+
+====================================================================================================
+FINAL INSTRUCTION
+====================================================================================================
+
+Generate a **5-slide, TED-style, visually distinctive presentation** for GenreWhisper that feels like a literary AI artifact: dark, gold-lit, bookish, immersive, and technically serious.
+
+The presentation should look like it belongs to the same universe as a premium interactive website built around a floating 3D book and the phrase:
+
+**"Unveiling Hidden Genres from the Whispers of Readers."**
+
+If your system supports speaker notes, presenter intent, design rationale, or slide-by-slide creative direction, include them.
