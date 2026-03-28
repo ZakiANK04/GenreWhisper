@@ -20,6 +20,7 @@ export default function UploadPage() {
   const [result, setResult] = useState<UploadResult | null>(null);
   const [stats, setStats] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [hostedPreview, setHostedPreview] = useState(false);
   
   const containerRef = useRef(null);
 
@@ -27,6 +28,10 @@ export default function UploadPage() {
     gsap.fromTo(containerRef.current, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1, ease: "power3.out" });
     const existing = JSON.parse(sessionStorage.getItem("genrewhisper_dataset") || "[]");
     setStats(existing.length);
+    if (typeof window !== "undefined") {
+      const hostname = window.location.hostname;
+      setHostedPreview(hostname.endsWith("vercel.app"));
+    }
   }, []);
 
   const handleDrag = (e: React.DragEvent) => {
@@ -53,6 +58,7 @@ export default function UploadPage() {
   };
 
   const handleFile = async (selectedFile: File) => {
+    if (hostedPreview) return;
     setFile(selectedFile);
     setAnalyzing(true);
     setResult(null);
@@ -110,6 +116,15 @@ export default function UploadPage() {
         </p>
       </div>
 
+      {hostedPreview && (
+        <div className="w-full max-w-3xl mb-6 border border-amber-500/30 bg-amber-950/30 text-amber-100 rounded-lg p-4 flex items-start gap-3">
+          <AlertTriangle size={20} className="shrink-0 mt-0.5 text-amber-400" />
+          <p className="font-sans text-sm leading-relaxed">
+            This Vercel deployment is a UI-only preview. Real file analysis is available in the local version, where the app can access the Python worker and large model assets required for extraction and inference.
+          </p>
+        </div>
+      )}
+
       <div 
         className={`w-full max-w-2xl border-2 border-dashed rounded-xl p-12 transition-all duration-300 flex flex-col items-center justify-center min-h-[300px] mb-8 relative overflow-hidden ${dragActive ? 'border-[#d4af37] bg-[#d4af37]/10 scale-[1.02]' : 'border-[#d4af37]/30 bg-[#1a120d]/50 hover:border-[#d4af37]/60'}`}
         onDragEnter={handleDrag}
@@ -120,7 +135,8 @@ export default function UploadPage() {
         <input 
           type="file" 
           accept=".txt,.csv,.json,.pdf,application/pdf" 
-          onChange={handleChange} 
+          onChange={handleChange}
+          disabled={hostedPreview}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
         />
         

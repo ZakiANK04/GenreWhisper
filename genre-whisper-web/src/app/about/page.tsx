@@ -39,7 +39,7 @@ export default function AboutPage() {
             <p className="text-[#e6dfcc]/60 font-sans text-sm mb-6 h-16">
               Dive into the data science pipeline. Contains full EDA, spaCy tokenization, FastText vectorization, and class weight mitigation.
             </p>
-            <Link href="https://colab.research.google.com/" target="_blank" className="inline-block px-6 py-2 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#110e0c] font-bold rounded transition-colors font-sans w-full">
+            <Link href="https://colab.research.google.com/drive/1I7Kp9n6G1F5sp45DHAuPqugXg_0_bm7b#scrollTo=0a69538d" target="_blank" className="inline-block px-6 py-2 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#110e0c] font-bold rounded transition-colors font-sans w-full">
               View Notebook Source
             </Link>
           </div>
@@ -61,7 +61,7 @@ export default function AboutPage() {
           <p className="text-[#e6dfcc]/50 font-sans text-sm mb-4">
             Built with Next.js 14, Tailwind CSS, GSAP 3, Three.js, and ONNX Runtime Web.
           </p>
-          <a href="https://github.com/" target="_blank" className="inline-flex items-center justify-center gap-2 text-[#e6dfcc]/70 hover:text-[#d4af37] transition-colors border border-transparent hover:border-[#d4af37]/30 px-4 py-2 rounded-full">
+          <a href="https://github.com/ZakiANK04/GenreWhisper" target="_blank" className="inline-flex items-center justify-center gap-2 text-[#e6dfcc]/70 hover:text-[#d4af37] transition-colors border border-transparent hover:border-[#d4af37]/30 px-4 py-2 rounded-full">
             <FolderGit2 size={18} /> View Source Code on GitHub
           </a>
         </div>

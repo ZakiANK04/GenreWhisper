@@ -16,6 +16,7 @@ export default function PredictPage() {
   const [isPredicting, setIsPredicting] = useState(false);
   const [result, setResult] = useState<PredictionResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [hostedPreview, setHostedPreview] = useState(false);
   
   const containerRef = useRef(null);
   const resultRef = useRef(null);
@@ -25,10 +26,14 @@ export default function PredictPage() {
       { opacity: 0, y: 30 }, 
       { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
     );
+    if (typeof window !== "undefined") {
+      const hostname = window.location.hostname;
+      setHostedPreview(hostname.endsWith("vercel.app"));
+    }
   }, []);
 
   const handlePredict = async () => {
-    if (!review.trim()) return;
+    if (!review.trim() || hostedPreview) return;
     setIsPredicting(true);
     setResult(null);
     setError(null);
@@ -77,6 +82,15 @@ export default function PredictPage() {
               Paste an Amazon book review below. Our FastText embeddings will process the semantic signature of the text, and the Logistic Regression model will unveil its hidden genre.
             </p>
           </div>
+
+          {hostedPreview && (
+            <div className="border border-amber-500/30 bg-amber-950/30 text-amber-100 rounded-lg p-4 flex items-start gap-3">
+              <AlertTriangle size={20} className="shrink-0 mt-0.5 text-amber-400" />
+              <p className="font-sans text-sm leading-relaxed">
+                This Vercel deployment is a UI-only preview. Real inference stays available in the local version because the production model depends on a Python worker and a very large FastText binary.
+              </p>
+            </div>
+          )}
           
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#d4af37]/40 to-[#2c1e16] rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
@@ -96,7 +110,7 @@ export default function PredictPage() {
 
           <button 
             onClick={handlePredict}
-            disabled={isPredicting || !review.trim()}
+            disabled={isPredicting || !review.trim() || hostedPreview}
             className="w-full py-4 bg-gradient-to-r from-[#d4af37] to-[#8a6b22] text-[#110e0c] font-bold font-serif text-lg rounded-sm hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:hover:scale-100 flex justify-center items-center gap-3 relative overflow-hidden"
           >
             {isPredicting ? (
